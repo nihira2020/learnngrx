@@ -1,3 +1,6 @@
-export const initialState={
-    counter:5
+import { CounterModel } from "./counter.model";
+
+export const initialState:CounterModel={
+    counter:5,
+    channelname:'Nihira Techiees'
 }
