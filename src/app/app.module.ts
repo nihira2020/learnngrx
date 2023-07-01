@@ -16,6 +16,8 @@ import { HomeComponent } from './component/home/home.component';
 import { CounterComponent } from './component/counter/counter.component';
 import { BlogComponent } from './component/blog/blog.component';
 import { MenuheaderComponent } from './component/menuheader/menuheader.component';
+import { blogReducer } from './shared/store/Blog/Blog.reducers';
+import { AppState } from './shared/store/Global/App.state';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import { MenuheaderComponent } from './component/menuheader/menuheader.component
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    StoreModule.forRoot({counter:counterReducer}),
+    StoreModule.forRoot(AppState),
     BrowserAnimationsModule,
     FormsModule,
     StoreDevtoolsModule.instrument({ maxAge: false, logOnly: !isDevMode() })

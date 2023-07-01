@@ -7,6 +7,6 @@ export class MasterService {
 
   constructor() { }
   haveaccess() {
-    return false;
+    return true;
   }
 }

@@ -1,1 +1,12 @@
-<p>blog works!</p>
+<div style="text-align: center;">
+<h1>Technology Blogs</h1>
+
+<mat-card *ngFor="let item of bloglist">
+    <mat-card-header>
+        <h1>{{item.title}}</h1>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{item.description}}</p>
+    </mat-card-content>
+</mat-card>
+</div>

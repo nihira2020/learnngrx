@@ -4,6 +4,7 @@ import { customincrement } from 'src/app/shared/store/counter.actions';
 import { CounterModel } from 'src/app/shared/store/counter.model';
 import { Subscription,Observable } from 'rxjs'
 import { getchannelname } from 'src/app/shared/store/counter.selector';
+import { AppStateModel } from 'src/app/shared/store/Global/AppState.Model';
 
 @Component({
   selector: 'app-customcounter',
@@ -11,7 +12,7 @@ import { getchannelname } from 'src/app/shared/store/counter.selector';
   styleUrls: ['./customcounter.component.css']
 })
 export class CustomcounterComponent implements OnInit {
-  constructor(private store: Store<{ counter: CounterModel }>) {
+  constructor(private store: Store<AppStateModel>) {
 
   }
   ngOnInit(): void {
