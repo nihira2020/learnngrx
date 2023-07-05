@@ -10,7 +10,7 @@ import { counterReducer } from './shared/store/counter.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './Material.Module';
 import { CustomcounterComponent } from './component/customcounter/customcounter.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HomeComponent } from './component/home/home.component';
 import { CounterComponent } from './component/counter/counter.component';
@@ -18,6 +18,7 @@ import { BlogComponent } from './component/blog/blog.component';
 import { MenuheaderComponent } from './component/menuheader/menuheader.component';
 import { blogReducer } from './shared/store/Blog/Blog.reducers';
 import { AppState } from './shared/store/Global/App.state';
+import { AddblogComponent } from './component/addblog/addblog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AppState } from './shared/store/Global/App.state';
     HomeComponent,
     CounterComponent,
     BlogComponent,
-    MenuheaderComponent
+    MenuheaderComponent,
+    AddblogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { AppState } from './shared/store/Global/App.state';
     StoreModule.forRoot(AppState),
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: false, logOnly: !isDevMode() })
   ],
   providers: [],
