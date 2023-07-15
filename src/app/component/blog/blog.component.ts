@@ -5,7 +5,7 @@ import { BlogModel } from 'src/app/shared/store/Blog/Blog.model';
 import { getblog } from 'src/app/shared/store/Blog/Blog.selectors';
 import { AppStateModel } from 'src/app/shared/store/Global/AppState.Model';
 import { AddblogComponent } from '../addblog/addblog.component';
-import { deleteblog } from 'src/app/shared/store/Blog/Blog.actions';
+import { deleteblog, loadblog } from 'src/app/shared/store/Blog/Blog.actions';
 
 @Component({
   selector: 'app-blog',
@@ -20,6 +20,7 @@ export class BlogComponent implements OnInit {
   bloglist !: BlogModel[];
 
   ngOnInit(): void {
+    this.store.dispatch(loadblog());
     this.store.select(getblog).subscribe(item => {
       this.bloglist = item;
       console.log(this.bloglist);
