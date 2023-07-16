@@ -1,8 +1,15 @@
 <div style="text-align: center;">
 <h1>Technology Blogs</h1>
+<div *ngIf="!bloginfo.Errormessage">
+
+
 <button (click)="AddBlog()" mat-raised-button color="primary">Add Blog</button>
 
-<mat-card *ngFor="let item of bloglist">
+<mat-card *ngIf="!bloginfo.bloglist.length">
+    <h1>No Blog found</h1>
+</mat-card>
+
+<mat-card *ngFor="let item of bloginfo.bloglist">
     <mat-card-header>
         <h1>{{item.title}}</h1>
         <div style="text-align: right;width: 100%;">
@@ -14,4 +21,14 @@
         <p>{{item.description}}</p>
     </mat-card-content>
 </mat-card>
+</div>
+
+ <mat-card *ngIf="bloginfo.Errormessage">
+    <mat-card-header>
+        <h1>Error Occured</h1>
+    </mat-card-header>
+    <mat-card-content>
+        <p style="color: red;">{{bloginfo.Errormessage}}</p>
+    </mat-card-content>
+ </mat-card>
 </div>

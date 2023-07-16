@@ -1,9 +1,29 @@
 {
   "Blogs": [
-    { "id": 1, "title": "Angular", "description": "Angular is an opensource powered by google" },
-    { "id": 2, "title": "React", "description": "React is an opensource powered by META" },
-    { "id": 3, "title": ".NET", "description": ".NET is an opensource powered by Microsoft" },
-    { "id": 4, "title": "JAVA", "description": "Java is a programming language and a platform. Java is a high level, robust, object-oriented and secure programming language." },
-    { "id": 5, "title": "React JS", "description": "React is an opensource powered by META" }
+    {
+      "id": 1,
+      "title": "Angular",
+      "description": "Angular is an opensource powered by google"
+    },
+    {
+      "id": 2,
+      "title": "React",
+      "description": "React is an opensource powered by META"
+    },
+    {
+      "id": 3,
+      "title": ".NET",
+      "description": ".NET is an opensource powered by Microsoft"
+    },
+    {
+      "id": 4,
+      "title": "JAVA",
+      "description": "New"
+    },
+    {
+      "id": 5,
+      "title": "Java 2",
+      "description": "New 2"
+    }
   ]
 }
