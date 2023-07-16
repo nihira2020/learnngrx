@@ -17,13 +17,23 @@
     },
     {
       "id": 4,
-      "title": "JAVA",
-      "description": "New"
+      "title": "AngularJS",
+      "description": "First version"
     },
     {
       "id": 5,
-      "title": "Java 2",
-      "description": "New 2"
+      "title": "java",
+      "description": "Standard"
+    },
+    {
+      "id": 6,
+      "title": "python",
+      "description": "Tech"
+    },
+    {
+      "id": 7,
+      "title": "Test",
+      "description": "Testing"
     }
   ]
 }
