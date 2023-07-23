@@ -1,15 +1,17 @@
 import { Injectable } from "@angular/core"
-import { Actions, createEffect, ofType } from "@ngrx/effects"
+import { Actions, act, createEffect, ofType } from "@ngrx/effects"
 import { MasterService } from "../../master.service"
 import { LOAD_BLOG, addblog, addblogsuccess, deleteblog, deleteblogsuccess, loadblogfail, loadblogsuccess, updateblog, updateblogsuccess } from "./Blog.actions"
-import { EMPTY, catchError, exhaustMap, map, mergeMap, of } from "rxjs"
+import { EMPTY, catchError, exhaustMap, map, mergeMap, of, switchMap } from "rxjs"
 import { BlogModel } from "./Blog.model"
+import { MatSnackBar } from "@angular/material/snack-bar"
+import { EmptyAction, ShowAlert } from "../Global/App.Action"
 
 @Injectable()
 export class BlogEffects {
 
 
-    constructor(private action$: Actions, private service: MasterService) {
+    constructor(private action$: Actions, private service: MasterService, private _snackbar: MatSnackBar) {
 
     }
     _lodblog = createEffect(() =>
@@ -27,45 +29,50 @@ export class BlogEffects {
             )
     );
 
-    _AddBlog=createEffect(()=>
-     this.action$.pipe(
+    _AddBlog = createEffect(() =>
+        this.action$.pipe(
             ofType(addblog),
-            exhaustMap(action=>{
-                return this.service.CreateBlog(action.bloginput).pipe(
-                    map((data)=>{
-                       return addblogsuccess({bloginput:data as BlogModel})
-                    }),
-                    catchError((_error) => of(loadblogfail({ Errortext: _error })))
+            switchMap(action =>
+                this.service.CreateBlog(action.bloginput).pipe(
+                    switchMap(data => of(
+                        addblogsuccess({ bloginput: data as BlogModel }),
+                        ShowAlert({ message: 'Created successfully.', actionresult: 'pass' })
+                    )),
+                    catchError((_error) => of(ShowAlert({ message: 'Failed to create blog.', actionresult: 'fail' })))
                 )
-            })
+            )
         )
     );
 
-    _UpdateBlog=createEffect(()=>
-    this.action$.pipe(
-           ofType(updateblog),
-           exhaustMap(action=>{
-               return this.service.UpdateBlog(action.bloginput).pipe(
-                   map(()=>{
-                      return updateblogsuccess({bloginput:action.bloginput})
-                   }),
-                   catchError((_error) => of(loadblogfail({ Errortext: _error })))
-               )
-           })
-       )
-   );
+    _UpdateBlog = createEffect(() =>
+        this.action$.pipe(
+            ofType(updateblog),
+            switchMap(action =>
+                this.service.UpdateBlog(action.bloginput).pipe(
+                    switchMap(res => of(
+                        updateblogsuccess({ bloginput: action.bloginput }),
+                        ShowAlert({ message: 'Updated successfully.', actionresult: 'pass' })
+                    )),
+                    catchError((_error) => of(ShowAlert({ message: 'Update Failed - Due to' + _error.message, actionresult: 'fail' })))
+                )
+            )
+        )
+    );
 
-   _DeleteBlog=createEffect(()=>
-    this.action$.pipe(
-           ofType(deleteblog),
-           exhaustMap(action=>{
-               return this.service.DeleteBlog(action.id).pipe(
-                   map(()=>{
-                      return deleteblogsuccess({id:action.id})
-                   }),
-                   catchError((_error) => of(loadblogfail({ Errortext: _error })))
-               )
-           })
-       )
-   );
+    _DeleteBlog = createEffect(() =>
+        this.action$.pipe(
+            ofType(deleteblog),
+            switchMap(action =>
+                this.service.DeleteBlog(action.id).pipe(
+                    switchMap(res => of(
+                        deleteblogsuccess({ id: action.id }),
+                        ShowAlert({ message: 'Removed successfully.', actionresult: 'pass' })
+                    )),
+                    catchError((_error) => of(ShowAlert({ message: 'Failed to remove.', actionresult: 'fail' })))
+                )
+            )
+        )
+    );
+
+
 }
