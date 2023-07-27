@@ -11,6 +11,7 @@ export const UPDATE_BLOG_SUCCESS='[blog page] update blog success';
 export const DELETE_BLOG='[blog page] delete blog';
 export const DELETE_BLOG_SUCCESS='[blog page] delete blog success';
 
+
 export const loadblog=createAction(LOAD_BLOG);
 
 export const loadblogsuccess=createAction(LOAD_BLOG_SUCCESS,props<{bloglist:BlogModel[]}>())
@@ -28,3 +29,4 @@ export const updateblogsuccess=createAction(UPDATE_BLOG_SUCCESS,props<{bloginput
 export const deleteblog=createAction(DELETE_BLOG,props<{id:number}>());
 
 export const deleteblogsuccess=createAction(DELETE_BLOG_SUCCESS,props<{id:number}>());
+

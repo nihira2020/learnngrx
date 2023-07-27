@@ -5,7 +5,7 @@ import { LOAD_BLOG, addblog, addblogsuccess, deleteblog, deleteblogsuccess, load
 import { EMPTY, catchError, exhaustMap, map, mergeMap, of, switchMap } from "rxjs"
 import { BlogModel } from "./Blog.model"
 import { MatSnackBar } from "@angular/material/snack-bar"
-import { EmptyAction, ShowAlert } from "../Global/App.Action"
+import { EmptyAction, ShowAlert, loadspinner } from "../Global/App.Action"
 
 @Injectable()
 export class BlogEffects {
@@ -22,8 +22,9 @@ export class BlogEffects {
                     return this.service.GetAllBlogs().pipe(
                         map((data) => {
                             return loadblogsuccess({ bloglist: data });
+                            
                         }),
-                        catchError((_error) => of(loadblogfail({ Errortext: _error })))
+                        catchError((_error) => of(loadblogfail({ Errortext: _error }),loadspinner({isloaded:false})))
                     )
                 })
             )
@@ -36,9 +37,10 @@ export class BlogEffects {
                 this.service.CreateBlog(action.bloginput).pipe(
                     switchMap(data => of(
                         addblogsuccess({ bloginput: data as BlogModel }),
+                        loadspinner({isloaded:false}),
                         ShowAlert({ message: 'Created successfully.', actionresult: 'pass' })
                     )),
-                    catchError((_error) => of(ShowAlert({ message: 'Failed to create blog.', actionresult: 'fail' })))
+                    catchError((_error) => of(ShowAlert({ message: 'Failed to create blog.', actionresult: 'fail' }),loadspinner({isloaded:false})))
                 )
             )
         )
@@ -51,9 +53,10 @@ export class BlogEffects {
                 this.service.UpdateBlog(action.bloginput).pipe(
                     switchMap(res => of(
                         updateblogsuccess({ bloginput: action.bloginput }),
+                        loadspinner({isloaded:false}),
                         ShowAlert({ message: 'Updated successfully.', actionresult: 'pass' })
                     )),
-                    catchError((_error) => of(ShowAlert({ message: 'Update Failed - Due to' + _error.message, actionresult: 'fail' })))
+                    catchError((_error) => of(ShowAlert({ message: 'Update Failed - Due to' + _error.message, actionresult: 'fail' }),loadspinner({isloaded:false})))
                 )
             )
         )
@@ -66,9 +69,10 @@ export class BlogEffects {
                 this.service.DeleteBlog(action.id).pipe(
                     switchMap(res => of(
                         deleteblogsuccess({ id: action.id }),
+                        loadspinner({isloaded:false}),
                         ShowAlert({ message: 'Removed successfully.', actionresult: 'pass' })
                     )),
-                    catchError((_error) => of(ShowAlert({ message: 'Failed to remove.', actionresult: 'fail' })))
+                    catchError((_error) => of(ShowAlert({ message: 'Failed to remove.', actionresult: 'fail' }),loadspinner({isloaded:false})))
                 )
             )
         )

@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {EffectsModule} from "@ngrx/effects"
 import { BlogEffects } from './shared/store/Blog/Blog.Effects';
 import { AppEffects } from './shared/store/Global/App.Effects';
+import { LoadingspinnerComponent } from './component/loadingspinner/loadingspinner.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AppEffects } from './shared/store/Global/App.Effects';
     CounterComponent,
     BlogComponent,
     MenuheaderComponent,
-    AddblogComponent
+    AddblogComponent,
+    LoadingspinnerComponent
   ],
   imports: [
     BrowserModule,
