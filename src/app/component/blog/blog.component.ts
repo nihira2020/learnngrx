@@ -7,6 +7,7 @@ import { AppStateModel } from 'src/app/shared/store/Global/AppState.Model';
 import { AddblogComponent } from '../addblog/addblog.component';
 import { deleteblog, loadblog } from 'src/app/shared/store/Blog/Blog.actions';
 import { loadspinner } from 'src/app/shared/store/Global/App.Action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -14,7 +15,7 @@ import { loadspinner } from 'src/app/shared/store/Global/App.Action';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-  constructor(private store: Store<AppStateModel>, private dialog: MatDialog) {
+  constructor(private store: Store<AppStateModel>, private dialog: MatDialog,private router:Router) {
 
   }
 
@@ -51,7 +52,8 @@ export class BlogComponent implements OnInit {
   }
 
   EditBlog(id: any) {
-    this.OpenPopup(id, 'Edit Blog', true);
+    //this.OpenPopup(id, 'Edit Blog', true);
+    this.router.navigate(['blog/edit/'+id])
   }
 
   RemoveBlog(id: any) {

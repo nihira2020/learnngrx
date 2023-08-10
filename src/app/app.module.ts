@@ -24,6 +24,9 @@ import {EffectsModule} from "@ngrx/effects"
 import { BlogEffects } from './shared/store/Blog/Blog.Effects';
 import { AppEffects } from './shared/store/Global/App.Effects';
 import { LoadingspinnerComponent } from './component/loadingspinner/loadingspinner.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { Customserializer } from './shared/store/Router/CustomSerializer';
+import { EditblogComponent } from './component/editblog/editblog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { LoadingspinnerComponent } from './component/loadingspinner/loadingspinn
     BlogComponent,
     MenuheaderComponent,
     AddblogComponent,
-    LoadingspinnerComponent
+    LoadingspinnerComponent,
+    EditblogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,10 @@ import { LoadingspinnerComponent } from './component/loadingspinner/loadingspinn
     ReactiveFormsModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument({ maxAge: false, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([BlogEffects,AppEffects])
+    EffectsModule.forRoot([BlogEffects,AppEffects]),
+    StoreRouterConnectingModule.forRoot(
+      {serializer:Customserializer}
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
