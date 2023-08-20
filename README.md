@@ -12,7 +12,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Run My Loal JSON Server
 
-Run `npm run json-run` to run local db json server. This will use `db.json` file.
+Run `npm run json-run` to run local db json server.
 
 ## Build
 
